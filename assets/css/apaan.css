@@ -1,0 +1,183 @@
+/* General Styles */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.8;
+  flex: 1; /* Memungkinkan body untuk mengisi ruang yang tersedia */
+}
+
+/* Header */
+header {
+  background-color: #0056b3;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav__link {
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  color: #ffc107;
+}
+
+/* About Section */
+.about__section {
+  background-color: #ffffff;
+  padding: 60px 30px;
+  border-radius: 8px;
+  margin: 30px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #ffc107;
+  border: none;
+  color: #333;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #e0a800;
+}
+
+/* Carousel Image Styling */
+.carousel-inner img {
+  height: 300px; /* Sesuaikan tinggi sesuai kebutuhan */
+  width: 100%;
+  object-fit: cover; /* Agar gambar terpotong otomatis */
+}
+
+/* Footer */
+.footer {
+  margin-top: auto; /* Memastikan footer berada di bawah */
+  background-color: #0056b3;
+  color: white;
+  padding: 25px 0;
+}
+
+.footer__social i {
+  font-size: 1.8rem;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.footer__social i:hover {
+  color: #ffc107;
+}
+
+#map {
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.destination-list {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.destination-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  flex: 1 1 calc(33.333% - 15px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.destination-card:hover {
+  transform: scale(1.05);
+}
+
+.m img {
+  height: 600px; /* Atur tinggi gambar sesuai kebutuhan */
+  object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+}
+
+
+
+
+/* .discover__card {
+  position: relative;
+  width: 200px;
+  overflow: var(--img-hidden);
+}
+
+.discover__data {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1rem;
+}
+
+.discover__title, 
+.discover__description {
+  color: var(--white-color);
+}
+
+.discover__title {
+  font-size: var(--h3-font-size);
+  margin-bottom: var(--mb-0-25);
+}
+
+.discover__description {
+  display: block;
+  font-size: var(--smaller-font-size);
+}
+
+.discover__img {
+  transition: var(--img-transition);
+}
+
+.discover__img:hover {
+  transform: var(--img-scale);
+}
+
+.swiper-container-3d .swiper-slide-shadow-left,
+.swiper-container-3d .swiper-slide-shadow-right {
+  background-image: none;
+}
+
+.section {
+  padding: 4.5rem 0 2.5rem;
+}
+
+.section__title {
+  font-size: var(--h2-font-size);
+  color: var(--title-color);
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: var(--mb-2);
+}
+
+.container {
+  max-width: 968px;
+  margin-left: var(--mb-1);
+  margin-right: var(--mb-1);
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+ */

@@ -1,0 +1,178 @@
+{
+        name: "Batu Night Spectacular (BNS)",
+        lat: -7.8833,
+        lon: 112.5288,
+        categories: ["hiburan"],
+        description:
+          "Tempat hiburan malam dengan wahana permainan dan pertunjukan lampu spektakuler.",
+      },
+      {
+        name: "Gunung Bromo",
+        lat: -7.9425,
+        lon: 112.953,
+        categories: ["alam"],
+        description: "Gunung berapi terkenal dengan keindahan panoramanya.",
+      },
+      {
+        name: "Jatim Park 1",
+        lat: -7.8838,
+        lon: 112.5332,
+        categories: ["edukasi", "hiburan"],
+        description:
+          "Taman rekreasi dengan wahana edukasi yang menggabungkan ilmu pengetahuan dan hiburan.",
+      },
+      {
+        name: "Jatim Park 2",
+        lat: -7.8831,
+        lon: 112.5286,
+        categories: ["edukasi", "hiburan"],
+        description: "Taman bermain dan kebun binatang modern.",
+      },
+      {
+        name: "Coban Rondo",
+        lat: -7.7303,
+        lon: 112.4638,
+        categories: ["alam"],
+        description: "Air terjun indah di lereng Gunung Panderman.",
+      },
+      {
+        name: "Museum Angkut",
+        lat: -7.8831,
+        lon: 112.5286,
+        categories: ["budaya", "edukasi"],
+        description: "Museum transportasi terbesar di Indonesia.",
+      },
+      {
+        name: "Alun-alun Kota Malang",
+        lat: -7.9824,
+        lon: 112.6308,
+        categories: ["budaya"],
+        description: "Pusat kota dengan suasana yang ramai dan menarik.",
+      },
+      {
+        name: "Kebun Teh Wonosari",
+        lat: -7.9192,
+        lon: 112.9473,
+        categories: ["alam"],
+        description: "Perkebunan teh dengan pemandangan hijau menakjubkan.",
+      },
+      {
+        name: "Paralayang Batu",
+        lat: -7.8547,
+        lon: 112.4968,
+        categories: ["alam", "hiburan"],
+        description:
+          "Pegunungan Batu dengan wisata paralayang dan city lightnya di malam hari.",
+      },
+      {
+        name: "Hotel Tugu Malang",
+        lat: -7.9771,
+        lon: 112.6331,
+        categories: ["hotel", "budaya"],
+        description:
+          "Hotel bintang 5 dengan nuansa tradisional Jawa, lengkap dengan koleksi seni dan artefak bersejarah.",
+      },
+      {
+        name: "The Shalimar Boutique Hotel",
+        lat: -7.9698,
+        lon: 112.6252,
+        categories: ["hotel"],
+        description:
+          "Hotel bintang 5 dengan arsitektur kolonial yang elegan, menawarkan kenyamanan dan kemewahan.",
+      },
+      {
+        name: "Grand Mercure Malang Mirama",
+        lat: -7.9417,
+        lon: 112.6486,
+        categories: ["hotel"],
+        description:
+          "Hotel bintang 5 dengan fasilitas lengkap seperti kolam renang, pusat kebugaran, dan restoran mewah.",
+      },
+      {
+        name: "HARRIS Hotel & Conventions Malang",
+        lat: -7.92586,
+        lon: 112.6452,
+        categories: ["hotel"],
+        description:
+          "Hotel bintang 4 dengan desain kontemporer, memiliki kolam renang, spa, dan pusat kebugaran.",
+      },
+      {
+        name: "Atria Hotel Malang",
+        lat: -7.9492,
+        lon: 112.6392,
+        categories: ["hotel"],
+        description:
+          "Hotel bintang 4 dengan fasilitas lengkap, termasuk restoran dan kolam renang, di pusat kota Malang.",
+      },
+      {
+        name: "Ijen Suites Resort & Convention",
+        lat: -7.9808,
+        lon: 112.6156,
+        categories: ["hotel"],
+        description:
+          "Hotel bintang 4 dengan pemandangan indah, fasilitas kolam renang, dan pusat kebugaran.",
+      },
+      {
+        name: "Pantai Tiga Warna",
+        lat: -8.4379,
+        lon: 112.678,
+        categories: ["alam"],
+        description:
+          "Pantai dengan gradasi tiga warna air laut, menawarkan snorkeling dengan terumbu karang yang indah.",
+      },
+      {
+        name: "Gunung Panderman",
+        lat: -7.9021,
+        lon: 112.4972,
+        categories: ["alam"],
+        description:
+          "Gunung dengan ketinggian 2.000 mdpl, cocok untuk pendaki pemula dengan pemandangan kota Batu dari puncaknya.",
+      },
+      {
+        name: "Kampung Warna-Warni Jodipan",
+        lat: -7.9782,
+        lon: 112.6371,
+        categories: ["budaya", "hiburan"],
+        description:
+          "Perkampungan dengan bangunan berwarna-warni, cocok untuk spot foto Instagram.",
+      },
+      {
+        name: "Kasembon Rafting Malang",
+        lat: -7.8021,
+        lon: 112.3123,
+        categories: ["alam", "hiburan"],
+        description:
+          "Lokasi arung jeram yang menantang di Sungai Brantas dengan pemandangan alam.",
+      },
+      {
+        name: "Coban Talun",
+        lat: -7.8031,
+        lon: 112.5163,
+        categories: ["alam"],
+        description:
+          "Air terjun tersembunyi dengan trek pendakian menantang dan pemandangan hijau.",
+      },
+      {
+        name: "Pantai Teluk Asmara",
+        lat: -8.4424,
+        lon: 112.6652,
+        categories: ["alam"],
+        description:
+          "Pantai dengan pulau-pulau kecil yang menyerupai Raja Ampat, menawarkan pemandangan eksotis dan spot snorkeling.",
+      },
+      {
+        name: "Gunung Kawi",
+        lat: -7.9541,
+        lon: 112.4651,
+        categories: ["alam", "budaya"],
+        description:
+          "Kompleks makam keramat dengan pemandangan pegunungan hijau.",
+      },
+      {
+        name: "Bobocabin Coban Rondo",
+        lat: -7.8701,
+        lon: 112.4867,
+        categories: ["hotel", "alam"],
+        description:
+          "Resort dengan pemandangan lembah hijau dan fasilitas mewah.",
+      }

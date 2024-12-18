@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/png">
+    <title>Journey Craft - Cari Destinasi WIisata</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="assets/css/apaan.css" />
+    <!--  -->
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <nav
+        class="container d-flex justify-content-between align-items-center py-3"
+      >
+        <a
+          href="index.html"
+          class="nav__logo fs-4 fw-bold text-white text-decoration-none"
+          >Journey Craft</a
+        >
+        <div>
+          <a href="index.html" class="nav__link">Beranda</a>
+          <a href="about.html" class="nav__link">Tentang Kami</a>
+          <a href="reserve.html" class="nav__link">Destinasi</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="container mt-5 text-center">
+      <h1>Destinasi Wisata Malang</h1>
+      <p class="lead">Eksplorasi keindahan destinasi terbaik di Malang</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="container mt-4">
+      <div class="btn-group d-flex justify-content-center" role="group">
+        <button
+          class="btn btn-outline-primary category-btn active"
+          data-category="all"
+        >
+          Semua
+        </button>
+        <button
+          class="btn btn-outline-primary category-btn"
+          data-category="alam"
+        >
+          Alam
+        </button>
+        <button
+          class="btn btn-outline-primary category-btn"
+          data-category="budaya"
+        >
+          Budaya
+        </button>
+        <button
+          class="btn btn-outline-primary category-btn"
+          data-category="hiburan"
+        >
+          Hiburan
+        </button>
+        <button
+          class="btn btn-outline-primary category-btn"
+          data-category="edukasi"
+        >
+          Edukasi
+        </button>
+        <button
+          class="btn btn-outline-primary category-btn"
+          data-category="hotel"
+        >
+          Hotel
+        </button>
+      </div>
+      <div id="map"></div>
+    </div>
+
+    <!-- Destination Cards -->
+    <div class="container mt-4">
+      <div class="row g-4" id="destination-list"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center mt-5">
+      <div class="container">
+        <p class="mb-2">Jelajahi Dunia Bersama Kami</p>
+        <div>
+          <a href="#" class="footer__social"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="footer__social"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="footer__social"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="footer__social"><i class="bi bi-youtube"></i></a>
+        </div>
+        <p class="mt-3 mb-0">&#169; 2024 Journey Craft. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+      // Initialize Map
+      const map = L.map("map").setView([-7.9825, 112.6326], 10);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(map);
+
+      const destinations = [
+        {
+          name: "Batu Night Spectacular (BNS)",
+          lat: -7.8833,
+          lon: 112.5288,
+          categories: ["hiburan"],
+          description:
+            "Tempat hiburan malam dengan wahana permainan dan pertunjukan lampu spektakuler.",
+          link: "https://maps.app.goo.gl/5mT9FnArQPUogTPg6",
+        },
+        {
+          name: "Gunung Bromo",
+          lat: -7.9425,
+          lon: 112.953,
+          categories: ["alam"],
+          description: "Gunung berapi terkenal dengan keindahan panoramanya.",
+          link: "https://maps.app.goo.gl/VSCDjmnrhsRMrMq19",
+        },
+        {
+          name: "Jatim Park 1",
+          lat: -7.8838,
+          lon: 112.5332,
+          categories: ["edukasi", "hiburan"],
+          description:
+            "Taman rekreasi dengan wahana edukasi yang menggabungkan ilmu pengetahuan dan hiburan.",
+          link: "https://maps.app.goo.gl/E93hLE4Tnju4PyJV7",
+        },
+        {
+          name: "Jatim Park 2",
+          lat: -7.8831,
+          lon: 112.5286,
+          categories: ["edukasi", "hiburan"],
+          description: "Taman bermain dan kebun binatang modern.",
+          link: "https://maps.app.goo.gl/JFMSyjTZFbr2WuTJ9",
+        },
+        {
+          name: "Coban Rondo",
+          lat: -7.7303,
+          lon: 112.4638,
+          categories: ["alam"],
+          description: "Air terjun indah di lereng Gunung Panderman.",
+          link: "https://maps.app.goo.gl/UASo4rsZnmcDvpEUA",
+        },
+        {
+          name: "Museum Angkut",
+          lat: -7.8831,
+          lon: 112.5286,
+          categories: ["budaya", "edukasi"],
+          description: "Museum transportasi terbesar di Indonesia.",
+          link: "https://maps.app.goo.gl/6LaFet7sTEWLm3eF7",
+        },
+        {
+          name: "Alun-alun Kota Malang",
+          lat: -7.9824,
+          lon: 112.6308,
+          categories: ["budaya"],
+          description: "Pusat kota dengan suasana yang ramai dan menarik.",
+          link: "https://maps.app.goo.gl/2gyophrkx2JNNkSx8",
+        },
+        {
+          name: "Kebun Teh Wonosari",
+          lat: -7.9192,
+          lon: 112.9473,
+          categories: ["alam"],
+          description: "Perkebunan teh dengan pemandangan hijau menakjubkan.",
+          link: "https://maps.app.goo.gl/AGKzt9Nkh74nuhwT8",
+        },
+        {
+          name: "Paralayang Batu",
+          lat: -7.8547,
+          lon: 112.4968,
+          categories: ["alam", "hiburan"],
+          description:
+            "Pegunungan Batu dengan wisata paralayang dan city lightnya di malam hari.",
+          link: "https://maps.app.goo.gl/VWcbofsvKaC51Hpy9",
+        },
+        {
+          name: "Hotel Tugu Malang",
+          lat: -7.9771,
+          lon: 112.6331,
+          categories: ["hotel", "budaya"],
+          description:
+            "Hotel bintang 5 dengan nuansa tradisional Jawa, lengkap dengan koleksi seni dan artefak bersejarah.",
+          link: "https://www.tuguhotels.com",
+        },
+        {
+          name: "The Shalimar Boutique Hotel",
+          lat: -7.9698,
+          lon: 112.6252,
+          categories: ["hotel"],
+          description:
+            "Hotel bintang 5 dengan arsitektur kolonial yang elegan, menawarkan kenyamanan dan kemewahan.",
+          link: "https://www.theshalimarhotel.co.id",
+        },
+        {
+          name: "Grand Mercure Malang Mirama",
+          lat: -7.9417,
+          lon: 112.6486,
+          categories: ["hotel"],
+          description:
+            "Hotel bintang 5 dengan fasilitas lengkap seperti kolam renang, pusat kebugaran, dan restoran mewah.",
+          link: "https://www.all.accor.com/hotel/grand-mercure-malang",
+        },
+        {
+          name: "HARRIS Hotel & Conventions Malang",
+          lat: -7.92586,
+          lon: 112.6452,
+          categories: ["hotel"],
+          description:
+            "Hotel bintang 4 dengan desain kontemporer, memiliki kolam renang, spa, dan pusat kebugaran.",
+          link: "https://malang.harrishotels.com",
+        },
+        {
+          name: "Atria Hotel Malang",
+          lat: -7.9492,
+          lon: 112.6392,
+          categories: ["hotel"],
+          description:
+            "Hotel bintang 4 dengan fasilitas lengkap, termasuk restoran dan kolam renang, di pusat kota Malang.",
+          link: "https://www.atriahotels.com/malang",
+        },
+        {
+          name: "Ijen Suites Resort & Convention",
+          lat: -7.9808,
+          lon: 112.6156,
+          categories: ["hotel"],
+          description:
+            "Hotel bintang 4 dengan pemandangan indah, fasilitas kolam renang, dan pusat kebugaran.",
+          link: "https://www.ijensuitesmalang.com",
+        },
+        {
+          name: "The Alana Hotel",
+          lat: -7.8377,
+          lon: 112.6759,
+          categories: ["hotel"],
+          description:
+            "Hotel bintang 4 dengan fasilitas modern seperti kolam renang dan pusat kebugaran.",
+          link: "https://www.alanahotels.com",
+        },
+        {
+          name: "Aria Gajayana Hotel",
+          lat: -7.9774,
+          lon: 112.6240,
+          categories: ["hotel"],
+          description:
+            "Hotel bintang 4 yang terletak di pusat kota, dekat dengan pusat perbelanjaan dan destinasi wisata.",
+          link: "https://www.ariagajayanahotel.com",
+        },
+        {
+          name: "Air Terjun Grojokan Sewu",
+          lat: -7.8662,
+          lon: 112.4232,
+          categories: ["alam"],
+          description:
+            "Air terjun megah setinggi 180 meter dengan pemandangan tebing hijau yang menakjubkan.",
+          link: "https://maps.app.goo.gl/hSDGgWcHcvAGpwwm8",
+        },
+        {
+          name: "Pantai Balekambang",
+          lat: -8.4031,
+          lon: 112.5338,
+          categories: ["alam"],
+          description:
+            "Pantai indah dengan pasir putih dan pura di atas pulau karang, sering disebut 'Tanah Lot'nya Malang.",
+          link: "https://maps.app.goo.gl/DEQcNDSVJQHqS5Vm7",
+        },
+        {
+          name: "Gunung Panderman",
+          lat: -7.9021, 
+          lon: 112.4972,
+          categories: ["alam"],
+          description:
+            "Gunung dengan ketinggian 2.000 mdpl, cocok untuk pendaki pemula dengan pemandangan kota Batu dari puncaknya.",
+          link: "https://maps.app.goo.gl/tksza672Cv58oBtc6",
+        },
+        {
+          name: "Pantai Tiga Warna",
+          lat: -8.4379, 
+          lon: 112.6780,
+          categories: ["alam"],
+          description:
+            "Pantai dengan gradasi tiga warna air laut, menawarkan snorkeling dengan terumbu karang yang indah.",
+          link: "https://maps.app.goo.gl/gu9d1nQRCexQvLxk9",
+        },
+        {
+          name: "Coban Rais",
+          lat: -7.9147, 
+          lon: 112.5058,
+          categories: ["alam"],
+          description:
+            "Air terjun setinggi 20 meter dengan jalur trekking menantang dan spot foto menarik seperti Bukit Bulu dan Flower Garden.",
+          link: "https://maps.app.goo.gl/CZi6it3fTbnX1jtQ6",
+        },
+        {
+          name: "Sumber Sirah",
+          lat: -8.1227,
+          lon: 112.6206,
+          categories: ["alam"],
+          description:
+            "Mata air jernih yang cocok untuk snorkeling, menampilkan pemandangan bawah air yang memukau.",
+          link: "https://maps.app.goo.gl/Mg6cAWq8KzzsSw3i8",
+        },
+        {
+          name: "Pantai Ngantep",
+          lat: -8.4083, 
+          lon: 112.5749,
+          categories: ["alam"],
+          description:
+            "Pantai yang masih asri dengan ombak tenang, ideal untuk bersantai dan menikmati keindahan alam.",
+          link: "https://maps.app.goo.gl/ccWB6Ssiygk1rrTQ8",
+        },
+        {
+          name: "Coban Rondo",
+          lat: -7.8838, 
+          lon: 112.4766,
+          categories: ["alam"],
+          description:
+            "Air terjun setinggi 84 meter dengan fasilitas outbound dan labirin yang menarik.",
+          link: "https://maps.app.goo.gl/coban-rondo",
+        },
+        {
+          name: "Pantai Teluk Asmara",
+          lat: -8.4424, 
+          lon: 112.6652,
+          categories: ["alam"],
+          description:
+            "Pantai dengan pulau-pulau kecil yang menyerupai Raja Ampat, menawarkan pemandangan eksotis dan spot snorkeling.",
+          link: "https://maps.app.goo.gl/uEk2MYBRj6EsBEhS6",
+        },
+        {
+          name: "Candi Singosari",
+          lat:-7.8875, 
+          lon: 112.66375,
+          categories: ["budaya", "edukasi"],
+          description: "Candi Hindu bersejarah dari zaman Kerajaan Singosari.",
+          link: "https://maps.app.goo.gl/cU4ELQdR8Z9Ecvho8",
+        },
+        {
+          name: "Kampung Warna-Warni Jodipan",
+          lat: -7.9782,
+          lon: 112.6371,
+          categories: ["budaya", "hiburan"],
+          description:
+            "Perkampungan dengan bangunan berwarna-warni, cocok untuk spot foto Instagram.",
+          link: "https://maps.app.goo.gl/nxhtE9Az47RJPAi47",
+        },
+        {
+          name: "Omah Kayu",
+          lat:-7.8547, 
+          lon: 112.4977,
+          categories: ["alam", "hiburan", "hotel"],
+          description:
+            "Penginapan dan wisata di rumah pohon dengan pemandangan kota Batu dari ketinggian.",
+          link: "https://maps.app.goo.gl/EUrjmJcgyA7NwgL3A",
+        },
+        {
+          name: "Selecta",
+          lat: -7.8218,
+          lon: 112.5266,
+          categories: ["alam", "hiburan"],
+          description:
+            "Taman rekreasi sejuk di ketinggian dengan kolam renang dan kebun buah.",
+          link: "https://maps.app.goo.gl/4gLU6mmkqK33T2Qb9",
+        },
+        {
+          name: "Kusuma Agrowisata",
+          lat: -7.8835,
+          lon: 112.5159,
+          categories: ["alam", "edukasi"],
+          description:
+            "Tempat wisata pertanian dengan berbagai jenis tanaman dan kegiatan petik buah.",
+          link: "https://maps.app.goo.gl/ogTMCis6bS9nAJFDA",
+        },
+        {
+          name: "Predator Fun Park",
+          lat: -7.9123, 
+          lon: 112.5486,
+          categories: ["hiburan", "edukasi"],
+          description:
+            "Taman bermain dengan koleksi satwa buas dan berbagai wahana edukasi.",
+          link: "https://maps.app.goo.gl/9JevMBukez9JM4C38",
+        },
+        {
+          name: "Eco Green Park",
+          lat: -7.8876, 
+          lon: 112.5266,
+          categories: ["alam", "edukasi"],
+          description:
+            "Taman edukasi lingkungan dengan berbagai area hijau dan wahana interaktif.",
+          link: "https://maps.app.goo.gl/53nNEax17okoyaYX6",
+        },
+        {
+          name: "Agro Wisata Apel Malang",
+          lat:-7.8514, 
+          lon: 112.5269,
+          categories: ["alam", "edukasi"],
+          description:
+            "Perkebunan apel dengan kegiatan petik apel dan edukasi pertanian.",
+          link: "Agro Wisata Apel Malang",
+        },
+        {
+          name: "The Singhasari Resort",
+          lat: -7.8930,
+          lon: 112.5501,
+          categories: ["hotel", "hiburan"],
+          description:
+            "Resort mewah dengan fasilitas lengkap dan pemandangan pegunungan.",
+          link: "https://maps.app.goo.gl/4JmDLqCKAguuAhJu5",
+        },
+        {
+          name: "Batu Flower Garden",
+          lat: -7.9114, 
+          lon: 112.5188,
+          categories: ["alam", "hiburan"],
+          description:
+            "Taman bunga luas dengan berbagai jenis tanaman hias dan spot foto.",
+          link: "https://maps.app.goo.gl/PidJN9WD4Mbx94j16",
+        },
+        {
+          name: "Kasembon Rafting Malang",
+          lat: -7.8021,
+          lon: 112.3123,
+          categories: ["alam", "hiburan"],
+          description:
+            "Lokasi arung jeram yang menantang di Sungai Brantas dengan pemandangan alam.",
+          link: "https://maps.app.goo.gl/16jRgpUo32FAS28H7",
+        }, 
+        {
+          name: "Coban Talun",
+          lat: -7.8031, 
+          lon: 112.5163,
+          categories: ["alam"],
+          description:
+            "Air terjun tersembunyi dengan Trek pendakian menantang dan pemandangan hijau.",
+          link: "https://maps.app.goo.gl/jjh16dcBcftDiv5g7",
+        },
+        {
+          name: "Wisata Edukasi Kopi Malang",
+          lat: -7.9623,
+          lon: 112.6053,
+          categories: ["edukasi", "alam"],
+          description:
+            "Perjalanan dari biji kopi hingga secangkir, dengan workshop dan degustasi.",
+          link: "https://maps.app.goo.gl/Gq78rZvnyreFGx6B7",
+        },
+        {
+          name: "Kampung Budaya Polowijen",
+          lat: -7.9203,
+          lon: 112.6444,
+          categories: ["budaya", "edukasi"],
+          description:
+            "Pusat pelestarian budaya lokal dengan berbagai kegiatan tradisional.",
+          link: "https://maps.app.goo.gl/NAX3MtXL3Wixj3LPA",
+        },
+        {
+          name: "Pantai Sendang Biru",
+          lat: -8.4318,
+          lon: 112.6840,
+          categories: ["alam"],
+          description:
+            "Pantai eksotis di selatan Kabupaten Malang dengan pemandangan alam memukau.",
+          link: "https://maps.app.goo.gl/pdgeyZFHBpjUzDUU7",
+        },
+        {
+          name: "Pantai Ngliyep",
+          lat: -8.3834,
+          lon: 112.4241,
+          categories: ["alam"],
+          description:
+            "Pantai alami dengan ombak tenang dan pemandangan hijau di sekitarnya.",
+          link: "https://maps.app.goo.gl/VB843ubiSXXJnCkD7",
+        },
+        {
+          name: "Sumber Maron",
+          lat: -8.1654, 
+          lon: 112.5920,
+          categories: ["alam"],
+          description:
+            "Objek wisata alam dengan mata air jernih dan suasana pedesaan.",
+          link: "https://maps.app.goo.gl/oztSx1KJYcXdVdMC9",
+        },
+        {
+          name: "Gunung Kawi",
+          lat: -7.9541, 
+          lon: 112.4651,
+          categories: ["alam", "budaya"],
+          description:
+            "Kompleks makam keramat dengan pemandangan pegunungan hijau.",
+          link: "https://maps.app.goo.gl/9Ac8a6uDC1ufV3eq5",
+        },
+        {
+          name: "Cafe Sawah Pujon",
+          lat: -7.8543,
+          lon: 112.4538,
+          categories: ["alam", "hiburan"],
+          description: "Kafe dengan konsep sawah dan pemandangan spektakuler.",
+          link: "https://maps.app.goo.gl/EKSjum6o3engfbNu7",
+        },
+        {
+          name: "Bendungan Lahor",
+          lat: -8.1447,
+          lon: 112.4510,
+          categories: ["alam"],
+          description: "Waduk indah dengan pemandangan alam dan aktivitas air.",
+          link: "https://maps.app.goo.gl/PMu343iPdTYaYEVM9",
+        },
+        {
+          name: "Coban Jahe",
+          lat: -7.970, 
+          lon: 112.8022,
+          categories: ["alam"],
+          description:
+            "Air terjun tersembunyi dengan trek pendakian menantang.",
+          link: "https://maps.app.goo.gl/BbmqCoL4SAxrT2mh8",
+        },
+        {
+          name: "Bobocabin Coban Rondo",
+          lat: -7.8701,
+          lon: 112.4867,
+          categories: ["hotel", "alam"],
+          description:
+            "Resort dengan pemandangan lembah hijau dan fasilitas mewah.",
+          link: "https://maps.app.goo.gl/C1hB2cgEchufuWgc8",
+        }
+
+        ];
+
+      const loadClickCounts = () => {
+        destinations.forEach((dest) => {
+          const clicks = localStorage.getItem(dest.name) || 0;
+          dest.clicks = parseInt(clicks);
+        });
+      };
+
+      const saveClickCount = (destinationName) => {
+        const currentClicks = localStorage.getItem(destinationName) || 0;
+        localStorage.setItem(destinationName, parseInt(currentClicks) + 1);
+      };
+
+      const destinationList = document.getElementById("destination-list");
+      const categoryButtons = document.querySelectorAll(".category-btn");
+
+      const displayDestinations = (category = "all") => {
+        map.eachLayer((layer) => {
+          if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+          }
+        });
+
+        destinationList.innerHTML = "";
+
+        const filteredDestinations =
+          category === "all"
+            ? destinations
+            : destinations.filter((dest) => dest.categories.includes(category));
+
+        filteredDestinations.forEach((dest) => {
+          const marker = L.marker([dest.lat, dest.lon])
+            .addTo(map)
+            .bindPopup(`<b>${dest.name}</b><br>${dest.description}`);
+
+          const card = document.createElement("div");
+          card.classList.add("col-md-4");
+
+          card.innerHTML = `
+                    <div class="card h-100 shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">${dest.name}</h5>
+                            <p class="card-text">${dest.description}</p>
+                            <p class="text-muted">Kategori: ${dest.categories.join(
+                              ", "
+                            )}</p>
+                            <p>Jumlah Klik: <span id="${dest.name}-clicks">${
+            dest.clicks || 0
+          }</span></p>
+                            <a href="${
+                              dest.link
+                            }" target="_blank" class="btn btn-primary">Lihat detail</a>
+                        </div>
+                    </div>
+                `;
+
+          card.addEventListener("click", () => {
+            saveClickCount(dest.name);
+            dest.clicks = (dest.clicks || 0) + 1;
+            document.getElementById(`${dest.name}-clicks`).innerText =
+              dest.clicks;
+            map.setView([dest.lat, dest.lon], 13);
+          });
+
+          destinationList.appendChild(card);
+        });
+      };
+
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          categoryButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          displayDestinations(button.dataset.category);
+        });
+      });
+
+      loadClickCounts();
+      displayDestinations();
+    </script>
+  </body>
+</html>
