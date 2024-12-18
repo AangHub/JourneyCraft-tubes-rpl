@@ -21,7 +21,7 @@
 }
 
 #chatbot-toggle:hover {
-    background-color: yellow;
+    background-color: crimson;
 }
 
 #chatbot-window {
@@ -47,7 +47,7 @@
 }
 
 .user-message {
-    background-color: yellow;
+    background-color: gainsboro;
     color: black;
     margin-left: auto;
 }
@@ -72,7 +72,7 @@
 }
 
 #chatbot-send {
-    background-color: #399918;
+    background-color: tan;
     color: var(--white-color);
     border: none;
     padding: .5rem 1rem;
@@ -82,7 +82,7 @@
 }
 
 #chatbot-send:hover {
-    background-color: #B4E380;
+    background-color: aquamarine;
 }
 
 .destination-card {

@@ -96,10 +96,10 @@
       <div class="container">
         <p class="mb-2">Jelajahi Dunia Bersama Kami</p>
         <div>
-          <a href="#" class="footer__social"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="footer__social"><i class="bi bi-twitter"></i></a>
-          <a href="#" class="footer__social"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="footer__social"><i class="bi bi-youtube"></i></a>
+          <a href="https://www.facebook.com/WonderfulIndonesia" class="footer__social"><i class="bi bi-facebook"></i></a>
+          <a href="https://x.com/wonderfulid" class="footer__social"><i class="bi bi-twitter"></i></a>
+          <a href="https://www.instagram.com/wonderfulindonesia/" class="footer__social"><i class="bi bi-instagram"></i></a>
+          <a href="www.youtube.com/@WonderfulIndonesiaOfficial" class="footer__social"><i class="bi bi-youtube"></i></a>
         </div>
         <p class="mt-3 mb-0">&#169; 2024 Journey Craft. All rights reserved.</p>
       </div>
@@ -114,7 +114,36 @@
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "© OpenStreetMap contributors",
       }).addTo(map);
-
+    
+      // Attempt to locate user
+      const locateUser = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const userLat = position.coords.latitude;
+              const userLon = position.coords.longitude;
+    
+              // Center the map on user's location
+              map.setView([userLat, userLon], 13);
+    
+              // Add a marker for the user's location
+              L.marker([userLat, userLon])
+                .addTo(map)
+                .bindPopup("Lokasi Anda saat ini")
+                .openPopup();
+            },
+            (error) => {
+              console.error("Geolocation tidak diizinkan atau gagal:", error);
+            }
+          );
+        } else {
+          alert("Geolocation tidak didukung di browser Anda.");
+        }
+      };
+    
+      // Call locateUser on page load
+      locateUser();
+    
       const destinations = [
         {
           name: "Batu Night Spectacular (BNS)",
@@ -539,64 +568,63 @@
             "Resort dengan pemandangan lembah hijau dan fasilitas mewah.",
           link: "https://maps.app.goo.gl/C1hB2cgEchufuWgc8",
         }
-
-        ];
-
+      ];
+    
       const loadClickCounts = () => {
         destinations.forEach((dest) => {
           const clicks = localStorage.getItem(dest.name) || 0;
           dest.clicks = parseInt(clicks);
         });
       };
-
+    
       const saveClickCount = (destinationName) => {
         const currentClicks = localStorage.getItem(destinationName) || 0;
         localStorage.setItem(destinationName, parseInt(currentClicks) + 1);
       };
-
+    
       const destinationList = document.getElementById("destination-list");
       const categoryButtons = document.querySelectorAll(".category-btn");
-
+    
       const displayDestinations = (category = "all") => {
         map.eachLayer((layer) => {
           if (layer instanceof L.Marker) {
             map.removeLayer(layer);
           }
         });
-
+    
         destinationList.innerHTML = "";
-
+    
         const filteredDestinations =
           category === "all"
             ? destinations
             : destinations.filter((dest) => dest.categories.includes(category));
-
+    
         filteredDestinations.forEach((dest) => {
           const marker = L.marker([dest.lat, dest.lon])
             .addTo(map)
             .bindPopup(`<b>${dest.name}</b><br>${dest.description}`);
-
+    
           const card = document.createElement("div");
           card.classList.add("col-md-4");
-
+    
           card.innerHTML = `
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">${dest.name}</h5>
-                            <p class="card-text">${dest.description}</p>
-                            <p class="text-muted">Kategori: ${dest.categories.join(
-                              ", "
-                            )}</p>
-                            <p>Jumlah Klik: <span id="${dest.name}-clicks">${
+                      <div class="card h-100 shadow">
+                          <div class="card-body">
+                              <h5 class="card-title">${dest.name}</h5>
+                              <p class="card-text">${dest.description}</p>
+                              <p class="text-muted">Kategori: ${dest.categories.join(
+                                ", "
+                              )}</p>
+                              <p>Jumlah Klik: <span id="${dest.name}-clicks">${
             dest.clicks || 0
           }</span></p>
-                            <a href="${
-                              dest.link
-                            }" target="_blank" class="btn btn-primary">Lihat detail</a>
-                        </div>
-                    </div>
-                `;
-
+                              <a href="${
+                                dest.link
+                              }" target="_blank" class="btn btn-primary">Lihat detail</a>
+                          </div>
+                      </div>
+                  `;
+    
           card.addEventListener("click", () => {
             saveClickCount(dest.name);
             dest.clicks = (dest.clicks || 0) + 1;
@@ -604,11 +632,11 @@
               dest.clicks;
             map.setView([dest.lat, dest.lon], 13);
           });
-
+    
           destinationList.appendChild(card);
         });
       };
-
+    
       categoryButtons.forEach((button) => {
         button.addEventListener("click", () => {
           categoryButtons.forEach((btn) => btn.classList.remove("active"));
@@ -616,9 +644,10 @@
           displayDestinations(button.dataset.category);
         });
       });
-
+    
       loadClickCounts();
       displayDestinations();
     </script>
+    
   </body>
 </html>
